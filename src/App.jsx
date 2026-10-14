@@ -5,7 +5,6 @@ import MusicCardTwo from "./components/MusicCardTwo.jsx";
 import MusicCardThree from "./components/MusicCardThree.jsx";
 
 import { Music, SkipBack, SkipForward } from "lucide-react"
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 export default function App() {
 
@@ -16,10 +15,7 @@ export default function App() {
   const [isPlaying, setIsPlaying] = useState(false); // Se a música está tocando ou não.
   const [currentTime, setCurrentTime] = useState(0); // Tempo atual da música em segundos.
   const [songSource, setSongSource] = useState(""); // Fonte /Caminho do Arquivo da música atual.
-  const [songID, setSongID] = useState(1); // ID da música atual (1, 2 ou 3).
-
-  const navigate = useNavigate(); // Hook do React Router para navegar entre as rotas.
-  const location = useLocation(); // Hook do React Router para obter informações sobre a rota atual.
+  const [songID, setSongID] = useState(0); // ID da música atual (1, 2 ou 3).
 
   const cardProps = { // Props que serão passados para os componentes MusicCardOne, MusicCardTwo e MusicCardThree.
     isPlaying,
@@ -54,26 +50,6 @@ export default function App() {
     setIsPlaying(true);
   }
 
-  function nextCard() { // Funções para navegar entre as rotas dos cards de música.
-    if (location.pathname === "/1" || location.pathname === "/") {
-      navigate("/2");
-    } else if (location.pathname === "/2") {
-      navigate("/3");
-    } else {
-      navigate("/1");
-    }
-  }
-
-  function previousCard() { // Funções para navegar entre as rotas dos cards de música.
-    if (location.pathname === "/1" || location.pathname === "/") {
-      navigate("/3");
-    } else if (location.pathname === "/3") {
-      navigate("/2");
-    } else {
-      navigate("/1");
-    }
-  }
-
   return (
     <>
       <main className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#090514] px-5 py-10 text-white">
@@ -93,27 +69,17 @@ export default function App() {
 
           <div className="mt-6 flex w-full justify-center">
             <span id="musicard" className="w-full max-w-sm">
-              <Routes>
-                <Route path="/" element={<MusicCardOne {...cardProps} />} />
-                <Route path="/1" element={<MusicCardOne {...cardProps} />} />
-                <Route path="/2" element={<MusicCardTwo {...cardProps} />} />
-                <Route path="/3" element={<MusicCardThree {...cardProps} />} />
-                <Route path="/*" element={<div className="text-8xl text-center font-black">
-                  404
-                </div>} />
-              </Routes>
+              <MusicCardOne {...cardProps} />
             </span>
           </div>
 
           <div className="pointer-events-none absolute inset-x-0 top-1/2 z-20 flex -translate-y-1/2 justify-between px-3 sm:px-6">
             <button aria-label="Música anterior" className="pointer-events-auto flex items-center justify-center rounded-full border border-purple-300 bg-purple-500/10 p-2 backdrop-blur-3xl transition hover:brightness-150 sm:p-3"
-              onClick={previousCard}
             >
               <SkipBack className="w-10 h-10" />
             </button>
 
             <button aria-label="Música seguinte" className="pointer-events-auto flex items-center justify-center rounded-full border border-purple-300 bg-purple-500/10 p-2 backdrop-blur-3xl transition hover:brightness-150 sm:p-3"
-              onClick={nextCard}
             >
               <SkipForward className="w-10 h-10" />
             </button>
