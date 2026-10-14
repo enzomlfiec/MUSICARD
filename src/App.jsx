@@ -9,56 +9,52 @@ import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 export default function App() {
 
-  // const musicCards = [
-  //   MusicCardOne,
-  //   MusicCardTwo,
-  //   MusicCardThree
-  // ];
-  // const CurrentMusicCard = musicCards[songID - 1] || MusicCardOne;
-
-
+  // Ref 
   const audioRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [songSource, setSongSource] = useState("");
-  const [songID, setSongID] = useState(1);
 
+  // States
+  const [isPlaying, setIsPlaying] = useState(false); // Se a música está tocando ou não.
+  const [currentTime, setCurrentTime] = useState(0); // Tempo atual da música em segundos.
+  const [songSource, setSongSource] = useState(""); // Fonte /Caminho do Arquivo da música atual.
+  const [songID, setSongID] = useState(1); // ID da música atual (1, 2 ou 3).
 
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigate = useNavigate(); // Hook do React Router para navegar entre as rotas.
+  const location = useLocation(); // Hook do React Router para obter informações sobre a rota atual.
 
-  const cardProps = {
+  const cardProps = { // Props que serão passados para os componentes MusicCardOne, MusicCardTwo e MusicCardThree.
     isPlaying,
     currentTime,
     songID,
     handleSongChange
   };
 
-  function togglePlay() {
-    const audio = audioRef.current;
-    if (!audio) return;
+  function togglePlay() { // Função para alternar entre tocar e pausar a música.
+    const audio = audioRef.current; // Obtém a referência do elemento de áudio.
+    if (!audio) return; // Se o elemento de áudio não estiver disponível, retorna sem fazer nada.
 
-    if (audio.paused) {
+    if (audio.paused) { // Se a música estiver pausada, toca a música e detecta erros de reprodução.
       audio.play().catch((error) => {
+        audio.src = "error.mp3"; // Se houver um erro ao tentar reproduzir a música, toca um som de erro e tenta reproduzir novamente.
+        audio.play();
         console.error("Audio playback failed:", error);
       });
-    } else {
+    } else { // Caso contrário, pausa a música.
       audio.pause();
     }
   }
 
-  function handleSongChange(source, id) {
-    if (songID === id) {
+  function handleSongChange(source, id) { // Função para alterar a música atual.
+    if (songID === id) { // Se a música atual for a mesma que a música selecionada, apenas alterna entre tocar e pausar.
       togglePlay();
       return;
     }
-
+    // Caso contrário, altera a fonte, o ID da música e define o estado de reprodução como verdadeiro.
     setSongSource(source);
     setSongID(id);
     setIsPlaying(true);
   }
 
-  function nextCard() {
+  function nextCard() { // Funções para navegar entre as rotas dos cards de música.
     if (location.pathname === "/1" || location.pathname === "/") {
       navigate("/2");
     } else if (location.pathname === "/2") {
@@ -68,7 +64,7 @@ export default function App() {
     }
   }
 
-  function previousCard() {
+  function previousCard() { // Funções para navegar entre as rotas dos cards de música.
     if (location.pathname === "/1" || location.pathname === "/") {
       navigate("/3");
     } else if (location.pathname === "/3") {
@@ -91,7 +87,7 @@ export default function App() {
               <Music strokeWidth={2} className="w-5 h-5 select-none" />
             </div>
             <p className="text-2xl font-black uppercase tracking-[0.5em] text-purple-white select-none">
-              Musicard
+              MUSICARD
             </p>
           </div>
 
@@ -125,21 +121,22 @@ export default function App() {
           </div>
         </section>
         <audio
-          ref={audioRef}
-          src={songSource}
-          onLoadedData={() => {
+          ref={audioRef} // Referência para o elemento de áudio, permitindo controlar a reprodução do áudio.
+          src={songSource} // Fonte do arquivo de áudio a ser reproduzido, definida pelo estado songSource.
+          onLoadedData={() => { // Evento disparado quando os dados do áudio são carregados.
             if (isPlaying) {
-              audioRef.current.play().catch(console.error);
+              audioRef.current.play().catch(console.error); // Tenta tocar o audio se há qualquer erro, exibe no console.
             }
           }}
-          onPlay={() => setIsPlaying(true)}
-          onPause={() => setIsPlaying(false)}
+          onPlay={() => setIsPlaying(true)} // Ao tocar, define o estado isPlaying como verdadeiro.
+          onPause={() => setIsPlaying(false)} // Mesma coisa para pausar, define o estado isPlaying como falso.
           onTimeUpdate={(event) =>
-            setCurrentTime(event.currentTarget.currentTime)
+            setCurrentTime(event.currentTarget.currentTime) // Atualiza o currentTime com o tempo atual do áudio.
           }
-          onEnded={() => setIsPlaying(false)}
+          onEnded={() => setIsPlaying(false)} // Quando o áudio termina, define o estado isPlaying como falso / "Pausa" a musica.
         />
       </main>
+      {/* Um salve! */}
       <footer className="absolute bottom-0 left-0 w-full text-center py-4 text-white/50 text-sm">
         Projeto desenvolvido por <span className="font-bold text-purple-400">Enzo</span> e <span className="font-bold text-purple-400">Kauan</span>
       </footer>
