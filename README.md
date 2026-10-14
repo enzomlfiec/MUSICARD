@@ -1,17 +1,31 @@
-# React + Vite
+# 🎵 M U S I C A R D
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Um projeto desenvolvido em **React JS** para aula inversa da FIEC sobre React Router.
 
-Currently, two official plugins are available:
+## 🎶 Músicas
+1. [Delusive Bunker](https://www.youtube.com/watch?v=F6E8oBp-MjQ)
+2. [Yakuza: Like a Dragon - Asphodelos](https://www.youtube.com/watch?v=wJUyOpzXo88)
+3. [Kurohyou 2 - the ELECTRIZER](https://www.youtube.com/watch?v=iYvkFT2012M)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠️ Tecnologias
+- React
+- JavaScript
+- Tailwind CSS
+- React Router
+- Vite
+- Lucide React
 
-## React Compiler
+## 🚀 Como instalar e executar
+```bash
+git clone https://github.com/enzomlfiec/MUSICARD.git
+npm install
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 👥 Desenvolvedores
+- Enzo Meneghin
+- Kauan Akihiro
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-"# MUSICARD" 
+*Projeto acadêmico desenvolvido para fins educacionais.*
