@@ -1,5 +1,5 @@
 
-import { Play, Pause} from "lucide-react";
+import { Play, Pause } from "lucide-react";
 
 export default function MusicCardThree({ isPlaying, currentTime, songID, handleSongChange }) {
     function formatTime(seconds) {

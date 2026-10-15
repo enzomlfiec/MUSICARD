@@ -53,11 +53,14 @@ export default function App() {
   return (
     <>
       <main className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#090514] px-5 py-10 text-white">
-        {/* Background */}
+        {/* Fundo */}
         <div className="absolute inset-0 bg-[url('https://i.redd.it/d0o107bmuck11.gif')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-purple-950/40 backdrop-blur-md" />
+
         {/* App */}
         <section className="relative z-10 flex w-full items-center justify-center flex-col">
+
+          {/* Logo */}
           <div className="mb-8 text-center flex justify-center items-center gap-5">
             <div className="flex items-center justify-center border-white py-2 px-1 rounded-lg border-2 select-none">
               <Music strokeWidth={2} className="w-5 h-5 select-none" />
@@ -67,25 +70,31 @@ export default function App() {
             </p>
           </div>
 
+          {/* Cartão de Música */}
           <div className="mt-6 flex w-full justify-center">
             <span id="musicard" className="w-full max-w-sm">
               <MusicCardOne {...cardProps} />
             </span>
           </div>
 
+          {/* Controles de Música */}
           <div className="pointer-events-none absolute inset-x-0 top-1/2 z-20 flex -translate-y-1/2 justify-between px-3 sm:px-6">
+            {/* Botão de Música Anterior */}
             <button aria-label="Música anterior" className="pointer-events-auto flex items-center justify-center rounded-full border border-purple-300 bg-purple-500/10 p-2 backdrop-blur-3xl transition hover:brightness-150 sm:p-3"
             >
               <SkipBack className="w-10 h-10" />
             </button>
 
+            {/* Botão de Música Seguinte */}
             <button aria-label="Música seguinte" className="pointer-events-auto flex items-center justify-center rounded-full border border-purple-300 bg-purple-500/10 p-2 backdrop-blur-3xl transition hover:brightness-150 sm:p-3"
             >
               <SkipForward className="w-10 h-10" />
             </button>
-
           </div>
+
         </section>
+
+        {/* Elemento de Áudio */}
         <audio
           ref={audioRef} // Referência para o elemento de áudio, permitindo controlar a reprodução do áudio.
           src={songSource} // Fonte do arquivo de áudio a ser reproduzido, definida pelo estado songSource.
@@ -102,8 +111,9 @@ export default function App() {
           onEnded={() => setIsPlaying(false)} // Quando o áudio termina, define o estado isPlaying como falso / "Pausa" a musica.
         />
       </main>
+
       {/* Um salve! */}
-      <footer className="absolute bottom-0 left-0 w-full text-center py-4 text-white/50 text-sm">
+      <footer className="absolute bg-black/50 border-t-2 border-purple-500/50 bottom-0 left-0 w-full text-center py-4 text-white/50 text-sm">
         Projeto desenvolvido por <span className="font-bold text-purple-400">Enzo</span> e <span className="font-bold text-purple-400">Kauan</span>
       </footer>
     </>

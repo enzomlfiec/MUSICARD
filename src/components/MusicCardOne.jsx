@@ -2,17 +2,23 @@
 import { Play, Pause,   } from "lucide-react";
 
 export default function MusicCardOne({ isPlaying, currentTime, songID, handleSongChange }) {
-    function formatTime(seconds) {
+
+    function formatTime(seconds) { // Função para formatar o tempo em minutos e segundos.
         if (songID !== 1) {
-            return "0:00";
+            return "-:--"; // Se a música atual não for a primeira, retorna "-:--" como tempo formatado.
         }
-        const minutes = Math.floor(seconds / 60);
+        // Math floor. serve para arredondar para baixo o número de minutos.
+        const minutes = Math.floor(seconds / 60); 
         const secondsLeft = Math.floor(seconds % 60);
+
+        // Retorna o tempo formatado como "minutos:segundos", garantindo que os segundos tenham sempre dois dígitos.
+        //Ex: Se o tempo for 3 minutos e 2 segundos, o retorno será "3:02".
         return `${minutes}:${String(secondsLeft).padStart(2, "0")}`;
     }
+
     return (
         <div className="rounded-3xl border border-white/10 bg-white/8 p-4 shadow-2xl backdrop-blur-2xl">
-            <img
+            <img 
                 src="/img3.jpg"
                 alt="Katana Zero Cover art"
                 className="aspect-square w-full rounded-2xl object-cover"
